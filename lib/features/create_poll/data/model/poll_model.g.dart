@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'poll_entity.dart';
+part of 'poll_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_PollEntity _$PollEntityFromJson(Map<String, dynamic> json) => _PollEntity(
+_PollModel _$PollModelFromJson(Map<String, dynamic> json) => _PollModel(
   id: json['id'] as String,
   title: json['title'] as String,
   description: json['description'] as String?,
@@ -29,7 +29,7 @@ _PollEntity _$PollEntityFromJson(Map<String, dynamic> json) => _PollEntity(
       const [],
 );
 
-Map<String, dynamic> _$PollEntityToJson(_PollEntity instance) =>
+Map<String, dynamic> _$PollModelToJson(_PollModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
