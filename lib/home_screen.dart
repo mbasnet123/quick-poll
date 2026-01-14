@@ -9,6 +9,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Text("Start your poll"),
+          
         ],
       ),
     );
