@@ -12,7 +12,15 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [],
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: "Poll Question",
+              hintText: "What would you like to ask?",
+              border: OutlineInputBorder(),
+            ),
+          )
+        ],
       ),
     );
   }
