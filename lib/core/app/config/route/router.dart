@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:quick_poll/core/app/config/route/paths.dart';
 
 import '../../../../home_screen.dart';
+import '../../../controller/app_state_observer.dart';
 
 class AppRouter {
   static final key = GlobalKey<NavigatorState>();
@@ -16,6 +17,14 @@ class AppRouter {
         name: Paths.homeScreenRoute.routeName,
         pageBuilder: (context, state) =>
             FadeTransitionPage(key: state.pageKey, child: const HomeScreen()),
+      ),
+      GoRoute(
+        path: Paths.appStateObserver.path,
+        name: Paths.appStateObserver.routeName,
+        pageBuilder: (context, state) => FadeTransitionPage(
+          key: state.pageKey,
+          child: const AppStateObserver(),
+        ),
       ),
     ],
   );
