@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quick_poll/core/app/theme_extension.dart';
 import 'package:quick_poll/core/utils/validation_util.dart';
+import 'package:quick_poll/shared/widgets/qp_button.dart';
+
+import '../widgets/poll_text_filled_header.dart';
 
 class CreatePollScreen extends StatefulWidget {
   const CreatePollScreen({super.key});
@@ -11,13 +15,16 @@ class CreatePollScreen extends StatefulWidget {
 class _CreatePollScreenState extends State<CreatePollScreen> {
   final _formKey = GlobalKey<FormState>();
   final questionController = TextEditingController();
+  final descriptionController = TextEditingController();
+  String pollDescription = "";
   String pollQuestion = "";
 
   @override
-  void dispose(){
+  void dispose() {
     questionController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +36,11 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
               Form(
                 key: _formKey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Poll Question"),
+                    PollTextFiledHeader(heading: "Poll Question"),
                     TextFormField(
                       controller: questionController,
                       decoration: InputDecoration(
@@ -39,7 +49,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                         fillColor: Colors.yellowAccent,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide:BorderSide.none,
+                          borderSide: BorderSide.none,
                         ),
                       ),
                       validator: ValidationUtil.pollQuestionValidator,
@@ -47,38 +57,52 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                         pollQuestion = value ?? "";
                       },
                     ),
-                    SizedBox(height: 10,),
-                    GestureDetector(
-                      onTap: (){
-                        final isValidated = _formKey.currentState?.validate() ?? false;
-                        if(!isValidated) return;
+                    SizedBox(height: 10),
+                    PollTextFiledHeader(heading: "Description(Optional)"),
+
+                    TextFormField(
+                      controller: descriptionController,
+                      decoration: InputDecoration(
+                        hintText: "Add context or details",
+                        filled: true,
+                        fillColor: context.colorScheme.primary,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        )
+                      ),
+                      onSaved: (value) {
+                        pollDescription = value ?? "";
+                      },
+                    ),
+
+                    FilledCTAButton(
+                      onPressed: () {
+                        final isValidated =
+                            _formKey.currentState?.validate() ?? false;
+                        if (!isValidated) return;
                         _formKey.currentState!.save();
-                        setState(() {
-                        });
+                        setState(() {});
                         questionController.clear();
                       },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.greenAccent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text("Submit"),
-                      ),
+                      text: "Submit",
+                      isExpanded: true,
                     ),
-                    if (pollQuestion.isNotEmpty)
-                      SizedBox(height: 10,),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.greenAccent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(pollQuestion),
-                      )
+                    if (pollQuestion.isNotEmpty) SizedBox(height: 10),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.greenAccent,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(pollQuestion),
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
