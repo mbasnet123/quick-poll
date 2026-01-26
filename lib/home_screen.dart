@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'core/app/config/route/paths.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,10 +9,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text("Start your poll"),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text("Start your poll"),
+            ElevatedButton(onPressed: (){
+              context.go(Paths.createPollScreenRoute.path);
+            }, child: Text("Poll Screen"))
+          ],
+        ),
       ),
     );
   }
