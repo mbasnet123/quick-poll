@@ -76,6 +76,14 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                       },
                     ),
 
+                    SizedBox(height: 10,),
+
+                    Text("POLL TYPE"),
+
+
+                    SizedBox(height: 10,),
+
+
                     FilledCTAButton(
                       onPressed: () {
                         final isValidated =
@@ -85,7 +93,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                         setState(() {});
                         questionController.clear();
                       },
-                      text: "Submit",
+                      text: "Create Poll",
                       isExpanded: true,
                     ),
                     if (pollQuestion.isNotEmpty) SizedBox(height: 10),
