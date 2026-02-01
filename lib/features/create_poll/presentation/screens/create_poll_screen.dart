@@ -4,6 +4,7 @@ import 'package:quick_poll/core/utils/validation_util.dart';
 import 'package:quick_poll/shared/widgets/qp_button.dart';
 
 import '../widgets/poll_text_filled_header.dart';
+import '../widgets/segment_item.dart';
 
 class CreatePollScreen extends StatefulWidget {
   const CreatePollScreen({super.key});
@@ -18,6 +19,13 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   final descriptionController = TextEditingController();
   String pollDescription = "";
   String pollQuestion = "";
+  int selectedPollTypeIndex = 0;
+
+  final List<SegmentItem> segments = [
+    SegmentItem(icon: Icons.format_list_bulleted, label: "Multiple"),
+    SegmentItem(icon: Icons.star_border, label: "Rating"),
+    SegmentItem(icon: Icons.thumb_up_outlined, label: "Yes/No"),
+  ];
 
   @override
   void dispose() {
@@ -111,6 +119,28 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                   ],
                 ),
               ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.all(4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children:
+                    List.generate(segments.length, (index){
+                      final isSelected = selectedPollTypeIndex == index;
+                      return Expanded(child: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            selectedPollTypeIndex = index;
+                          });
+                        },
+                      ));
+                    })
+
+                ),
+              )
             ],
           ),
         ),
