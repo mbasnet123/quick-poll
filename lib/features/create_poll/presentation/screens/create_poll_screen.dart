@@ -104,18 +104,20 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                       text: "Create Poll",
                       isExpanded: true,
                     ),
-                    if (pollQuestion.isNotEmpty) SizedBox(height: 10),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 10,
+                    if (pollQuestion.isNotEmpty)...[
+                      SizedBox(height: 10),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.greenAccent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(pollQuestion),
                       ),
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(pollQuestion),
-                    ),
+                    ]
                   ],
                 ),
               ),
@@ -130,13 +132,20 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                   children:
                     List.generate(segments.length, (index){
                       final isSelected = selectedPollTypeIndex == index;
-                      return Expanded(child: GestureDetector(
+                      return GestureDetector(
                         onTap: (){
                           setState(() {
                             selectedPollTypeIndex = index;
                           });
                         },
-                      ));
+                        child: Row(
+                          children: [
+                            Icon(segments[index].icon),
+                            SizedBox(width: 8,),
+                            Text(segments[index].label),
+                          ],
+                        ),
+                      );
                     })
 
                 ),
