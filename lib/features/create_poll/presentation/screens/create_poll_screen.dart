@@ -121,6 +121,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 10,),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey,
@@ -138,16 +139,27 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                             selectedPollTypeIndex = index;
                           });
                         },
-                        child: Row(
-                          children: [
-                            Icon(segments[index].icon),
-                            SizedBox(width: 8,),
-                            Text(segments[index].label),
-                          ],
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 200),
+                          margin: EdgeInsets.only(right: index != segments.length - 1 ? 8 : 0),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: isSelected ? Colors.blue : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(segments[index].icon,
+                              color: isSelected? Colors.white: Colors.black,),
+                              SizedBox(width: 8,),
+                              Text(segments[index].label, style: TextStyle(
+                                color: isSelected ? Colors.white : Colors.black
+                              ),),
+                            ],
+                          ),
                         ),
                       );
                     })
-
                 ),
               )
             ],
