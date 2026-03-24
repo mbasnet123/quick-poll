@@ -33,6 +33,17 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     super.dispose();
   }
 
+  void _onCreatePoll() {
+    final isValidated =
+        _formKey.currentState?.validate() ?? false;
+    if (!isValidated) return;
+    _formKey.currentState!.save();
+
+    final question = pollQuestion;
+    final description = pollDescription;
+    final pollType = segments[selectedPollTypeIndex].label;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
