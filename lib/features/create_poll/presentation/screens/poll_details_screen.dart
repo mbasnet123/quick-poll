@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quick_poll/shared/enums/poll_type.dart';
 
 class PollDetailsScreen extends StatelessWidget {
   final String question;
@@ -16,6 +17,29 @@ class PollDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Poll Details"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+        child: Column(
+          spacing: 8,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(child: Text("Question")),
+            Center(child: Text(question)),
+            if (description.isNotEmpty)...[
+              Center(child: Text("description"),),
+              Center(child: Text(description),)
+            ],
+            Center(child: Text("Poll Type"),),
+            Center(child: Text(pollType),),
+            Icon(pollTypeIcon),
+          ],
+        ),
+      ),
+    );
   }
 }

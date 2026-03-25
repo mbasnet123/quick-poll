@@ -15,4 +15,9 @@ class Paths {
     routeName: 'createPollScreen',
     path: '/createPollScreen',
   );
+
+  static final RouteModel pollDetailsScreenRoute = RouteModel(
+    routeName: 'pollDetailsScreen',
+    path: '/pollDetailsScreen',
+  );
 }

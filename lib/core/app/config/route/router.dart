@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quick_poll/core/app/config/route/paths.dart';
 import 'package:quick_poll/features/create_poll/presentation/screens/create_poll_screen.dart';
+import 'package:quick_poll/features/create_poll/presentation/screens/poll_details_screen.dart';
 
 import '../../../../home_screen.dart';
 import '../../../controller/app_state_observer.dart';
@@ -34,6 +35,22 @@ class AppRouter {
           key: state.pageKey,
           child: const CreatePollScreen(),
         ),
+      ),
+      GoRoute(
+        path: Paths.pollDetailsScreenRoute.path,
+        name: Paths.pollDetailsScreenRoute.routeName,
+        pageBuilder: (context, state) {
+          final data = state.extra as Map<String, dynamic>;
+          return FadeTransitionPage(
+            key: state.pageKey,
+            child: PollDetailsScreen(
+              question: data['question'],
+              description: data['description'],
+              pollType: data['pollType'],
+              pollTypeIcon: data['pollTypeIcon'],
+            ),
+          );
+        },
       ),
     ],
   );
