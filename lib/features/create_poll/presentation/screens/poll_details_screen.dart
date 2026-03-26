@@ -35,8 +35,14 @@ class PollDetailsScreen extends StatelessWidget {
               Center(child: Text(description),)
             ],
             Center(child: Text("Poll Type"),),
-            Center(child: Text(pollType),),
-            Icon(pollTypeIcon),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: Text(pollType),),
+                SizedBox(width: 8,),
+                Icon(pollTypeIcon),
+              ],
+            ),
           ],
         ),
       ),

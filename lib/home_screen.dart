@@ -13,9 +13,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Text("Start your poll"),
-            ElevatedButton(onPressed: (){
-              context.go(Paths.createPollScreenRoute.path);
-            }, child: Text("Poll Screen"))
+            SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () {
+                context.go(Paths.createPollScreenRoute.path);
+              },
+              child: Text("Poll Screen"),
+            ),
+
           ],
         ),
       ),
