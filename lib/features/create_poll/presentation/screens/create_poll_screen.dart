@@ -47,14 +47,22 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     questionController.clear();
     descriptionController.clear();
 
-    context.push(
-      Paths.pollDetailsScreenRoute.path,
-      extra: {
-        'question': question,
-        'description': description,
-        'pollType': pollType,
-        'pollTypeIcon': segments[selectedPollTypeIndex].icon,
-      },
+    // context.push(
+    //   Paths.pollDetailsScreenRoute.path,
+    //   extra: {
+    //     'question': question,
+    //     'description': description,
+    //     'pollType': pollType,
+    //     'pollTypeIcon': segments[selectedPollTypeIndex].icon,
+    //   },
+    // );
+
+    context.pop({
+      'question': pollQuestion,
+      'description': pollDescription,
+      'pollType': pollType,
+      'pollTypeIcon': segments[selectedPollTypeIndex].icon,
+    }
     );
   }
 

@@ -12,6 +12,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? question;
+  String? description;
+  String? pollType;
+  IconData? pollTypeIcon;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("Start your poll"),
             SizedBox(height: 8),
             SizedBox(height: 8,),
-            PollWidget(question: question, pollType: pollType, pollTypeIcon: pollTypeIcon),
+            PollWidget(question: question!, pollType: pollType!, pollTypeIcon: pollTypeIcon!),
           ],
         ),
       ),
