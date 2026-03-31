@@ -25,8 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("Start your poll"),
             SizedBox(height: 8),
             SizedBox(height: 8,),
-            PollWidget(question: question!, pollType: pollType!, pollTypeIcon: pollTypeIcon!),
-          ],
+            if (question != null && pollType != null && pollTypeIcon != null)
+              PollWidget(question: question!, pollType: pollType!, pollTypeIcon: pollTypeIcon!)
+            else
+              Text("Tap + to create a poll"),
+            ],
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () async{
