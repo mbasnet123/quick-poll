@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         }
       },
-      child: Text("Poll Screen"),),
+      child: Icon(Icons.add),),
     );
   }
 }
