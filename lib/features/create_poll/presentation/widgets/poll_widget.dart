@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/poll_model.dart';
+
 class PollWidget extends StatelessWidget {
-  final String question;
-  final String? description;
-  final String pollType;
-  final IconData pollTypeIcon;
+  final PollModel poll;
 
   const PollWidget({
-    super.key,
-    required this.question,
-    this.description,
-    required this.pollType,
-    required this.pollTypeIcon,
+    super.key, required this.poll,
   });
 
   @override
@@ -24,8 +19,8 @@ class PollWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(question),
-          Text(description ?? "no desc"),
+          Text(poll.title),
+          Text(poll.description ?? "no desc"),
         ],
       ),
     );
