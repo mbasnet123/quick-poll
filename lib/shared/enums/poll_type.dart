@@ -1,5 +1,5 @@
 enum PollType {
-  singleChoice,
+  yesNo,
   multipleChoice,
   rating,
   text, // asking for user text input

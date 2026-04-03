@@ -5,6 +5,7 @@ import 'package:quick_poll/core/utils/validation_util.dart';
 import 'package:quick_poll/shared/widgets/qp_button.dart';
 
 import '../../../../core/app/config/route/paths.dart';
+import '../../../../shared/enums/poll_type.dart';
 import '../widgets/poll_text_filled_header.dart';
 import '../widgets/segment_item.dart';
 
@@ -22,6 +23,22 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   String pollDescription = "";
   String pollQuestion = "";
   int selectedPollTypeIndex = 0;
+
+  PollType selectedType = PollType.yesNo;
+  final List<String> customOptions = [];
+
+  IconData _getTypeIcon(PollType type) {
+    switch (type) {
+      case PollType.yesNo:
+        return Icons.thumb_up_outlined;
+      case PollType.multipleChoice:
+        return Icons.format_list_bulleted;
+      case PollType.rating:
+        return Icons.star_border;
+      case PollType.text:
+        return Icons.text_fields;
+    }
+  }
 
   final List<SegmentItem> segments = [
     SegmentItem(icon: Icons.format_list_bulleted, label: "Multiple"),
