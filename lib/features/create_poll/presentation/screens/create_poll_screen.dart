@@ -20,6 +20,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   final _formKey = GlobalKey<FormState>();
   final questionController = TextEditingController();
   final descriptionController = TextEditingController();
+  final optionController = TextEditingController();
   String pollDescription = "";
   String pollQuestion = "";
   int selectedPollTypeIndex = 0;
@@ -38,6 +39,20 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       case PollType.text:
         return Icons.text_fields;
     }
+  }
+
+  void _addOption() {
+    if (optionController.text.isEmpty) return;
+    if (customOptions.length >= 5) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Maximum 5 options allowed")),
+      );
+      return;
+    }
+    setState(() {
+      customOptions.add(optionController.text);
+      optionController.clear();
+    });
   }
 
   final List<SegmentItem> segments = [
