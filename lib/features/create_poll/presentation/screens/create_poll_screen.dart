@@ -55,6 +55,22 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     });
   }
 
+  void _removeOption(int index) {
+    setState(() => customOptions.removeAt(index));
+  }
+
+  void _onCreatePoll() {
+    if (!_formKey.currentState!.validate()) return;
+
+    // validation for multipleChoice
+    if (selectedType == PollType.multipleChoice && customOptions.length < 2) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please add at least  2 options")),
+      );
+      return;
+    }
+  }
+
   final List<SegmentItem> segments = [
     SegmentItem(icon: Icons.format_list_bulleted, label: "Multiple"),
     SegmentItem(icon: Icons.star_border, label: "Rating"),
@@ -67,36 +83,36 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     super.dispose();
   }
 
-  void _onCreatePoll() {
-    final isValidated = _formKey.currentState?.validate() ?? false;
-    if (!isValidated) return;
-    _formKey.currentState!.save();
-
-    final question = pollQuestion;
-    final description = pollDescription;
-    final pollType = segments[selectedPollTypeIndex].label;
-
-    questionController.clear();
-    descriptionController.clear();
-
-    // context.push(
-    //   Paths.pollDetailsScreenRoute.path,
-    //   extra: {
-    //     'question': question,
-    //     'description': description,
-    //     'pollType': pollType,
-    //     'pollTypeIcon': segments[selectedPollTypeIndex].icon,
-    //   },
-    // );
-
-    context.pop({
-      'question': pollQuestion,
-      'description': pollDescription,
-      'pollType': pollType,
-      'pollTypeIcon': segments[selectedPollTypeIndex].icon,
-    }
-    );
-  }
+  // void _onCreatePoll() {
+  //   final isValidated = _formKey.currentState?.validate() ?? false;
+  //   if (!isValidated) return;
+  //   _formKey.currentState!.save();
+  //
+  //   final question = pollQuestion;
+  //   final description = pollDescription;
+  //   final pollType = segments[selectedPollTypeIndex].label;
+  //
+  //   questionController.clear();
+  //   descriptionController.clear();
+  //
+  //   // context.push(
+  //   //   Paths.pollDetailsScreenRoute.path,
+  //   //   extra: {
+  //   //     'question': question,
+  //   //     'description': description,
+  //   //     'pollType': pollType,
+  //   //     'pollTypeIcon': segments[selectedPollTypeIndex].icon,
+  //   //   },
+  //   // );
+  //
+  //   context.pop({
+  //     'question': pollQuestion,
+  //     'description': pollDescription,
+  //     'pollType': pollType,
+  //     'pollTypeIcon': segments[selectedPollTypeIndex].icon,
+  //   }
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
