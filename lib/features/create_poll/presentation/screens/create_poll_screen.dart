@@ -6,6 +6,7 @@ import 'package:quick_poll/shared/widgets/qp_button.dart';
 
 import '../../../../core/app/config/route/paths.dart';
 import '../../../../shared/enums/poll_type.dart';
+import '../../domain/entities/poll_option.dart';
 import '../widgets/poll_text_filled_header.dart';
 import '../widgets/segment_item.dart';
 
@@ -69,6 +70,15 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       );
       return;
     }
+  }
+
+  List<PollOption> options = [];
+
+  switch (selectedType) {
+    case PollType.yesNo:
+      options = [
+        PollOption(id: '1', optionText: optionText, order: order)
+    ]
   }
 
   final List<SegmentItem> segments = [
