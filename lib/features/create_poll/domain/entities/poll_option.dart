@@ -2,11 +2,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'poll_option.g.dart';
 part 'poll_option.freezed.dart';
 
-enum OptionSet{
-  agreeScale,
-  yesNo,
-  rating,
-}
+// enum OptionSet{
+//   agreeScale,
+//   yesNo,
+//   rating,
+// }
 
 @freezed
 abstract class PollOption with _$PollOption {

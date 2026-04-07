@@ -45,9 +45,9 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   void _addOption() {
     if (optionController.text.isEmpty) return;
     if (customOptions.length >= 5) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Maximum 5 options allowed")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Maximum 5 options allowed")));
       return;
     }
     setState(() {
@@ -65,20 +65,36 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
 
     // validation for multipleChoice
     if (selectedType == PollType.multipleChoice && customOptions.length < 2) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please add at least  2 options")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Please add at least  2 options")));
       return;
     }
-  }
 
-  List<PollOption> options = [];
+    List<PollOption> options = [];
 
-  switch (selectedType) {
-    case PollType.yesNo:
-      options = [
-        PollOption(id: '1', optionText: optionText, order: order)
-    ]
+    switch (selectedType) {
+      case PollType.yesNo:
+        options = [
+          PollOption(id: '1', optionText: 'Yes', order: 0),
+          PollOption(id: '2', optionText: 'No', order: 1),
+        ];
+        break;
+
+      case PollType.multipleChoice:
+        options = customOptions
+            .asMap()
+            .entries
+            .map(
+              (e) => PollOption(
+                id: e.key.toString(),
+                optionText: e.value,
+                order: e.key,
+              ),
+            )
+            .toList();
+          break;
+    }
   }
 
   final List<SegmentItem> segments = [
