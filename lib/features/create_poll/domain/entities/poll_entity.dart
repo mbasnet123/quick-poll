@@ -14,8 +14,19 @@ class PollEntity {
   final PollType pollType;
   final bool isAnonymous;
   final bool allowMultipleVotes;
-  final PollStatus status;
-  final List<PollQuestion> questions;
+  final bool isDraft;
+  final bool isClosed;
+
+  // final PollStatus status;
+
+  PollStatus get status {
+    if (isClosed) return PollStatus.closed;
+    if (expiresAt != null && DateTime.now().isAfter(expiresAt!))
+      return PollStatus.closed;
+    return PollStatus.active;
+  }
+
+  final PollQuestion question;
   final int totalVotes;
   final List<String> tags;
 
@@ -30,9 +41,9 @@ class PollEntity {
     required this.pollType,
     this.isAnonymous = false,
     this.allowMultipleVotes = false,
-    required this.status,
-    required this.questions,
+    // required this.status,
+    required this.question,
     this.totalVotes = 0,
-    this.tags = const [],
+    this.tags = const [], this.isDraft = false, this.isClosed = false,
   });
 }

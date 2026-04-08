@@ -48,7 +48,7 @@ Map<String, dynamic> _$PollModelToJson(_PollModel instance) =>
     };
 
 const _$PollTypeEnumMap = {
-  PollType.singleChoice: 'singleChoice',
+  PollType.yesNo: 'yesNo',
   PollType.multipleChoice: 'multipleChoice',
   PollType.rating: 'rating',
   PollType.text: 'text',

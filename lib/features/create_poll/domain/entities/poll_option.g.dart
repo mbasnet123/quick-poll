@@ -9,7 +9,7 @@ part of 'poll_option.dart';
 _PollOption _$PollOptionFromJson(Map<String, dynamic> json) => _PollOption(
   id: json['id'] as String,
   optionText: json['optionText'] as String,
-  order: (json['order'] as num).toInt(),
+  order: (json['order'] as num?)?.toInt(),
   voteCount: (json['voteCount'] as num?)?.toInt() ?? 0,
 );
 

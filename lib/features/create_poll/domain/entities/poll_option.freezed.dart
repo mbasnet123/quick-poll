@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PollOption {
 
- String get id; String get optionText; int get order; int get voteCount;
+ String get id; String get optionText; int? get order; int get voteCount;
 /// Create a copy of PollOption
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PollOptionCopyWith<$Res>  {
   factory $PollOptionCopyWith(PollOption value, $Res Function(PollOption) _then) = _$PollOptionCopyWithImpl;
 @useResult
 $Res call({
- String id, String optionText, int order, int voteCount
+ String id, String optionText, int? order, int voteCount
 });
 
 
@@ -65,12 +65,12 @@ class _$PollOptionCopyWithImpl<$Res>
 
 /// Create a copy of PollOption
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? optionText = null,Object? order = null,Object? voteCount = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? optionText = null,Object? order = freezed,Object? voteCount = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,optionText: null == optionText ? _self.optionText : optionText // ignore: cast_nullable_to_non_nullable
-as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as int,voteCount: null == voteCount ? _self.voteCount : voteCount // ignore: cast_nullable_to_non_nullable
+as String,order: freezed == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as int?,voteCount: null == voteCount ? _self.voteCount : voteCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String optionText,  int order,  int voteCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String optionText,  int? order,  int voteCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PollOption() when $default != null:
 return $default(_that.id,_that.optionText,_that.order,_that.voteCount);case _:
@@ -177,7 +177,7 @@ return $default(_that.id,_that.optionText,_that.order,_that.voteCount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String optionText,  int order,  int voteCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String optionText,  int? order,  int voteCount)  $default,) {final _that = this;
 switch (_that) {
 case _PollOption():
 return $default(_that.id,_that.optionText,_that.order,_that.voteCount);case _:
@@ -197,7 +197,7 @@ return $default(_that.id,_that.optionText,_that.order,_that.voteCount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String optionText,  int order,  int voteCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String optionText,  int? order,  int voteCount)?  $default,) {final _that = this;
 switch (_that) {
 case _PollOption() when $default != null:
 return $default(_that.id,_that.optionText,_that.order,_that.voteCount);case _:
@@ -212,12 +212,12 @@ return $default(_that.id,_that.optionText,_that.order,_that.voteCount);case _:
 @JsonSerializable()
 
 class _PollOption implements PollOption {
-  const _PollOption({required this.id, required this.optionText, required this.order, this.voteCount = 0});
+  const _PollOption({required this.id, required this.optionText, this.order, this.voteCount = 0});
   factory _PollOption.fromJson(Map<String, dynamic> json) => _$PollOptionFromJson(json);
 
 @override final  String id;
 @override final  String optionText;
-@override final  int order;
+@override final  int? order;
 @override@JsonKey() final  int voteCount;
 
 /// Create a copy of PollOption
@@ -253,7 +253,7 @@ abstract mixin class _$PollOptionCopyWith<$Res> implements $PollOptionCopyWith<$
   factory _$PollOptionCopyWith(_PollOption value, $Res Function(_PollOption) _then) = __$PollOptionCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String optionText, int order, int voteCount
+ String id, String optionText, int? order, int voteCount
 });
 
 
@@ -270,12 +270,12 @@ class __$PollOptionCopyWithImpl<$Res>
 
 /// Create a copy of PollOption
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? optionText = null,Object? order = null,Object? voteCount = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? optionText = null,Object? order = freezed,Object? voteCount = null,}) {
   return _then(_PollOption(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,optionText: null == optionText ? _self.optionText : optionText // ignore: cast_nullable_to_non_nullable
-as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as int,voteCount: null == voteCount ? _self.voteCount : voteCount // ignore: cast_nullable_to_non_nullable
+as String,order: freezed == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as int?,voteCount: null == voteCount ? _self.voteCount : voteCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

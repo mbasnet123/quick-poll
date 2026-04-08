@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quick_poll/core/app/theme_extension.dart';
+import 'package:quick_poll/core/storage/local/tables.dart';
 import 'package:quick_poll/core/utils/validation_util.dart';
+import 'package:quick_poll/features/create_poll/data/model/poll_model.dart';
 import 'package:quick_poll/shared/widgets/qp_button.dart';
 
 import '../../../../core/app/config/route/paths.dart';
@@ -86,15 +88,36 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
             .asMap()
             .entries
             .map(
-              (e) => PollOption(
+              (e) =>
+              PollOption(
                 id: e.key.toString(),
                 optionText: e.value,
                 order: e.key,
               ),
-            )
+        )
             .toList();
-          break;
+        break;
+
+      case PollType.rating:
+        options = List.generate(
+          5,
+              (i) => PollOption(id: i.toString(), optionText: "i"),
+        );
+        break;
+
+      case PollType.text:
+        options = [];
+        break;
     }
+
+    final poll = PollModel(id: DateTime.now().millisecondsSinceEpoch.toString(),
+        title: questionController.text,
+        creatorId: 'current_user',
+        creatorName: 'anonymous',
+        createdAt: DateTime.now(),
+        pollType: selectedType,
+        status: status,
+        questions: questions)
   }
 
   final List<SegmentItem> segments = [

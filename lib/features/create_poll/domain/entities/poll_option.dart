@@ -13,7 +13,7 @@ abstract class PollOption with _$PollOption {
   const factory PollOption({
     required String id,
     required String optionText,
-    required int order,
+    int? order,
     @Default(0) int voteCount,
   }) = _PollOption;
 
