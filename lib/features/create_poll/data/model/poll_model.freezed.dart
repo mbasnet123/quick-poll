@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PollModel {
 
- String get id; String get title; String? get description; String get creatorId; String get creatorName; DateTime get createdAt; DateTime? get expiresAt; PollType get pollType; bool get isAnonymous; bool get allowMultipleVotes; PollStatus get status; List<PollQuestion> get questions; int get totalVotes; List<String> get tags;
+ String get id; String get title; String? get description; String get creatorId; String get creatorName; DateTime get createdAt; DateTime? get expiresAt; PollType get pollType; bool get isAnonymous; bool get allowMultipleVotes; bool get isDraft; bool get isClosed; PollQuestion get question; int get totalVotes; List<String> get tags;
 /// Create a copy of PollModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PollModelCopyWith<PollModel> get copyWith => _$PollModelCopyWithImpl<PollModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PollModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.pollType, pollType) || other.pollType == pollType)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.allowMultipleVotes, allowMultipleVotes) || other.allowMultipleVotes == allowMultipleVotes)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.questions, questions)&&(identical(other.totalVotes, totalVotes) || other.totalVotes == totalVotes)&&const DeepCollectionEquality().equals(other.tags, tags));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PollModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.pollType, pollType) || other.pollType == pollType)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.allowMultipleVotes, allowMultipleVotes) || other.allowMultipleVotes == allowMultipleVotes)&&(identical(other.isDraft, isDraft) || other.isDraft == isDraft)&&(identical(other.isClosed, isClosed) || other.isClosed == isClosed)&&(identical(other.question, question) || other.question == question)&&(identical(other.totalVotes, totalVotes) || other.totalVotes == totalVotes)&&const DeepCollectionEquality().equals(other.tags, tags));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,creatorId,creatorName,createdAt,expiresAt,pollType,isAnonymous,allowMultipleVotes,status,const DeepCollectionEquality().hash(questions),totalVotes,const DeepCollectionEquality().hash(tags));
+int get hashCode => Object.hash(runtimeType,id,title,description,creatorId,creatorName,createdAt,expiresAt,pollType,isAnonymous,allowMultipleVotes,isDraft,isClosed,question,totalVotes,const DeepCollectionEquality().hash(tags));
 
 @override
 String toString() {
-  return 'PollModel(id: $id, title: $title, description: $description, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt, expiresAt: $expiresAt, pollType: $pollType, isAnonymous: $isAnonymous, allowMultipleVotes: $allowMultipleVotes, status: $status, questions: $questions, totalVotes: $totalVotes, tags: $tags)';
+  return 'PollModel(id: $id, title: $title, description: $description, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt, expiresAt: $expiresAt, pollType: $pollType, isAnonymous: $isAnonymous, allowMultipleVotes: $allowMultipleVotes, isDraft: $isDraft, isClosed: $isClosed, question: $question, totalVotes: $totalVotes, tags: $tags)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $PollModelCopyWith<$Res>  {
   factory $PollModelCopyWith(PollModel value, $Res Function(PollModel) _then) = _$PollModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String? description, String creatorId, String creatorName, DateTime createdAt, DateTime? expiresAt, PollType pollType, bool isAnonymous, bool allowMultipleVotes, PollStatus status, List<PollQuestion> questions, int totalVotes, List<String> tags
+ String id, String title, String? description, String creatorId, String creatorName, DateTime createdAt, DateTime? expiresAt, PollType pollType, bool isAnonymous, bool allowMultipleVotes, bool isDraft, bool isClosed, PollQuestion question, int totalVotes, List<String> tags
 });
 
 
-
+$PollQuestionCopyWith<$Res> get question;
 
 }
 /// @nodoc
@@ -65,7 +65,7 @@ class _$PollModelCopyWithImpl<$Res>
 
 /// Create a copy of PollModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = freezed,Object? creatorId = null,Object? creatorName = null,Object? createdAt = null,Object? expiresAt = freezed,Object? pollType = null,Object? isAnonymous = null,Object? allowMultipleVotes = null,Object? status = null,Object? questions = null,Object? totalVotes = null,Object? tags = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = freezed,Object? creatorId = null,Object? creatorName = null,Object? createdAt = null,Object? expiresAt = freezed,Object? pollType = null,Object? isAnonymous = null,Object? allowMultipleVotes = null,Object? isDraft = null,Object? isClosed = null,Object? question = null,Object? totalVotes = null,Object? tags = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -77,14 +77,24 @@ as DateTime,expiresAt: freezed == expiresAt ? _self.expiresAt : expiresAt // ign
 as DateTime?,pollType: null == pollType ? _self.pollType : pollType // ignore: cast_nullable_to_non_nullable
 as PollType,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
 as bool,allowMultipleVotes: null == allowMultipleVotes ? _self.allowMultipleVotes : allowMultipleVotes // ignore: cast_nullable_to_non_nullable
-as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as PollStatus,questions: null == questions ? _self.questions : questions // ignore: cast_nullable_to_non_nullable
-as List<PollQuestion>,totalVotes: null == totalVotes ? _self.totalVotes : totalVotes // ignore: cast_nullable_to_non_nullable
+as bool,isDraft: null == isDraft ? _self.isDraft : isDraft // ignore: cast_nullable_to_non_nullable
+as bool,isClosed: null == isClosed ? _self.isClosed : isClosed // ignore: cast_nullable_to_non_nullable
+as bool,question: null == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
+as PollQuestion,totalVotes: null == totalVotes ? _self.totalVotes : totalVotes // ignore: cast_nullable_to_non_nullable
 as int,tags: null == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
 as List<String>,
   ));
 }
-
+/// Create a copy of PollModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PollQuestionCopyWith<$Res> get question {
+  
+  return $PollQuestionCopyWith<$Res>(_self.question, (value) {
+    return _then(_self.copyWith(question: value));
+  });
+}
 }
 
 
@@ -166,10 +176,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String? description,  String creatorId,  String creatorName,  DateTime createdAt,  DateTime? expiresAt,  PollType pollType,  bool isAnonymous,  bool allowMultipleVotes,  PollStatus status,  List<PollQuestion> questions,  int totalVotes,  List<String> tags)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String? description,  String creatorId,  String creatorName,  DateTime createdAt,  DateTime? expiresAt,  PollType pollType,  bool isAnonymous,  bool allowMultipleVotes,  bool isDraft,  bool isClosed,  PollQuestion question,  int totalVotes,  List<String> tags)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PollModel() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.creatorName,_that.createdAt,_that.expiresAt,_that.pollType,_that.isAnonymous,_that.allowMultipleVotes,_that.status,_that.questions,_that.totalVotes,_that.tags);case _:
+return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.creatorName,_that.createdAt,_that.expiresAt,_that.pollType,_that.isAnonymous,_that.allowMultipleVotes,_that.isDraft,_that.isClosed,_that.question,_that.totalVotes,_that.tags);case _:
   return orElse();
 
 }
@@ -187,10 +197,10 @@ return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.cre
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String? description,  String creatorId,  String creatorName,  DateTime createdAt,  DateTime? expiresAt,  PollType pollType,  bool isAnonymous,  bool allowMultipleVotes,  PollStatus status,  List<PollQuestion> questions,  int totalVotes,  List<String> tags)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String? description,  String creatorId,  String creatorName,  DateTime createdAt,  DateTime? expiresAt,  PollType pollType,  bool isAnonymous,  bool allowMultipleVotes,  bool isDraft,  bool isClosed,  PollQuestion question,  int totalVotes,  List<String> tags)  $default,) {final _that = this;
 switch (_that) {
 case _PollModel():
-return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.creatorName,_that.createdAt,_that.expiresAt,_that.pollType,_that.isAnonymous,_that.allowMultipleVotes,_that.status,_that.questions,_that.totalVotes,_that.tags);case _:
+return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.creatorName,_that.createdAt,_that.expiresAt,_that.pollType,_that.isAnonymous,_that.allowMultipleVotes,_that.isDraft,_that.isClosed,_that.question,_that.totalVotes,_that.tags);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -207,10 +217,10 @@ return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.cre
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String? description,  String creatorId,  String creatorName,  DateTime createdAt,  DateTime? expiresAt,  PollType pollType,  bool isAnonymous,  bool allowMultipleVotes,  PollStatus status,  List<PollQuestion> questions,  int totalVotes,  List<String> tags)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String? description,  String creatorId,  String creatorName,  DateTime createdAt,  DateTime? expiresAt,  PollType pollType,  bool isAnonymous,  bool allowMultipleVotes,  bool isDraft,  bool isClosed,  PollQuestion question,  int totalVotes,  List<String> tags)?  $default,) {final _that = this;
 switch (_that) {
 case _PollModel() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.creatorName,_that.createdAt,_that.expiresAt,_that.pollType,_that.isAnonymous,_that.allowMultipleVotes,_that.status,_that.questions,_that.totalVotes,_that.tags);case _:
+return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.creatorName,_that.createdAt,_that.expiresAt,_that.pollType,_that.isAnonymous,_that.allowMultipleVotes,_that.isDraft,_that.isClosed,_that.question,_that.totalVotes,_that.tags);case _:
   return null;
 
 }
@@ -222,7 +232,7 @@ return $default(_that.id,_that.title,_that.description,_that.creatorId,_that.cre
 @JsonSerializable()
 
 class _PollModel extends PollModel {
-  const _PollModel({required this.id, required this.title, this.description, required this.creatorId, required this.creatorName, required this.createdAt, this.expiresAt, required this.pollType, this.isAnonymous = false, this.allowMultipleVotes = false, required this.status, required final  List<PollQuestion> questions, this.totalVotes = 0, final  List<String> tags = const []}): _questions = questions,_tags = tags,super._();
+  const _PollModel({required this.id, required this.title, this.description, required this.creatorId, required this.creatorName, required this.createdAt, this.expiresAt, required this.pollType, this.isAnonymous = false, this.allowMultipleVotes = false, this.isDraft = false, this.isClosed = false, required this.question, this.totalVotes = 0, final  List<String> tags = const []}): _tags = tags,super._();
   factory _PollModel.fromJson(Map<String, dynamic> json) => _$PollModelFromJson(json);
 
 @override final  String id;
@@ -235,14 +245,9 @@ class _PollModel extends PollModel {
 @override final  PollType pollType;
 @override@JsonKey() final  bool isAnonymous;
 @override@JsonKey() final  bool allowMultipleVotes;
-@override final  PollStatus status;
- final  List<PollQuestion> _questions;
-@override List<PollQuestion> get questions {
-  if (_questions is EqualUnmodifiableListView) return _questions;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_questions);
-}
-
+@override@JsonKey() final  bool isDraft;
+@override@JsonKey() final  bool isClosed;
+@override final  PollQuestion question;
 @override@JsonKey() final  int totalVotes;
  final  List<String> _tags;
 @override@JsonKey() List<String> get tags {
@@ -265,16 +270,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PollModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.pollType, pollType) || other.pollType == pollType)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.allowMultipleVotes, allowMultipleVotes) || other.allowMultipleVotes == allowMultipleVotes)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._questions, _questions)&&(identical(other.totalVotes, totalVotes) || other.totalVotes == totalVotes)&&const DeepCollectionEquality().equals(other._tags, _tags));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PollModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.creatorId, creatorId) || other.creatorId == creatorId)&&(identical(other.creatorName, creatorName) || other.creatorName == creatorName)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.expiresAt, expiresAt) || other.expiresAt == expiresAt)&&(identical(other.pollType, pollType) || other.pollType == pollType)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.allowMultipleVotes, allowMultipleVotes) || other.allowMultipleVotes == allowMultipleVotes)&&(identical(other.isDraft, isDraft) || other.isDraft == isDraft)&&(identical(other.isClosed, isClosed) || other.isClosed == isClosed)&&(identical(other.question, question) || other.question == question)&&(identical(other.totalVotes, totalVotes) || other.totalVotes == totalVotes)&&const DeepCollectionEquality().equals(other._tags, _tags));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,creatorId,creatorName,createdAt,expiresAt,pollType,isAnonymous,allowMultipleVotes,status,const DeepCollectionEquality().hash(_questions),totalVotes,const DeepCollectionEquality().hash(_tags));
+int get hashCode => Object.hash(runtimeType,id,title,description,creatorId,creatorName,createdAt,expiresAt,pollType,isAnonymous,allowMultipleVotes,isDraft,isClosed,question,totalVotes,const DeepCollectionEquality().hash(_tags));
 
 @override
 String toString() {
-  return 'PollModel(id: $id, title: $title, description: $description, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt, expiresAt: $expiresAt, pollType: $pollType, isAnonymous: $isAnonymous, allowMultipleVotes: $allowMultipleVotes, status: $status, questions: $questions, totalVotes: $totalVotes, tags: $tags)';
+  return 'PollModel(id: $id, title: $title, description: $description, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt, expiresAt: $expiresAt, pollType: $pollType, isAnonymous: $isAnonymous, allowMultipleVotes: $allowMultipleVotes, isDraft: $isDraft, isClosed: $isClosed, question: $question, totalVotes: $totalVotes, tags: $tags)';
 }
 
 
@@ -285,11 +290,11 @@ abstract mixin class _$PollModelCopyWith<$Res> implements $PollModelCopyWith<$Re
   factory _$PollModelCopyWith(_PollModel value, $Res Function(_PollModel) _then) = __$PollModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String? description, String creatorId, String creatorName, DateTime createdAt, DateTime? expiresAt, PollType pollType, bool isAnonymous, bool allowMultipleVotes, PollStatus status, List<PollQuestion> questions, int totalVotes, List<String> tags
+ String id, String title, String? description, String creatorId, String creatorName, DateTime createdAt, DateTime? expiresAt, PollType pollType, bool isAnonymous, bool allowMultipleVotes, bool isDraft, bool isClosed, PollQuestion question, int totalVotes, List<String> tags
 });
 
 
-
+@override $PollQuestionCopyWith<$Res> get question;
 
 }
 /// @nodoc
@@ -302,7 +307,7 @@ class __$PollModelCopyWithImpl<$Res>
 
 /// Create a copy of PollModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = freezed,Object? creatorId = null,Object? creatorName = null,Object? createdAt = null,Object? expiresAt = freezed,Object? pollType = null,Object? isAnonymous = null,Object? allowMultipleVotes = null,Object? status = null,Object? questions = null,Object? totalVotes = null,Object? tags = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = freezed,Object? creatorId = null,Object? creatorName = null,Object? createdAt = null,Object? expiresAt = freezed,Object? pollType = null,Object? isAnonymous = null,Object? allowMultipleVotes = null,Object? isDraft = null,Object? isClosed = null,Object? question = null,Object? totalVotes = null,Object? tags = null,}) {
   return _then(_PollModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -314,15 +319,25 @@ as DateTime,expiresAt: freezed == expiresAt ? _self.expiresAt : expiresAt // ign
 as DateTime?,pollType: null == pollType ? _self.pollType : pollType // ignore: cast_nullable_to_non_nullable
 as PollType,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
 as bool,allowMultipleVotes: null == allowMultipleVotes ? _self.allowMultipleVotes : allowMultipleVotes // ignore: cast_nullable_to_non_nullable
-as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as PollStatus,questions: null == questions ? _self._questions : questions // ignore: cast_nullable_to_non_nullable
-as List<PollQuestion>,totalVotes: null == totalVotes ? _self.totalVotes : totalVotes // ignore: cast_nullable_to_non_nullable
+as bool,isDraft: null == isDraft ? _self.isDraft : isDraft // ignore: cast_nullable_to_non_nullable
+as bool,isClosed: null == isClosed ? _self.isClosed : isClosed // ignore: cast_nullable_to_non_nullable
+as bool,question: null == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
+as PollQuestion,totalVotes: null == totalVotes ? _self.totalVotes : totalVotes // ignore: cast_nullable_to_non_nullable
 as int,tags: null == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
 as List<String>,
   ));
 }
 
-
+/// Create a copy of PollModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PollQuestionCopyWith<$Res> get question {
+  
+  return $PollQuestionCopyWith<$Res>(_self.question, (value) {
+    return _then(_self.copyWith(question: value));
+  });
+}
 }
 
 // dart format on

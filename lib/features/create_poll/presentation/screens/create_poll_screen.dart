@@ -4,6 +4,7 @@ import 'package:quick_poll/core/app/theme_extension.dart';
 import 'package:quick_poll/core/storage/local/tables.dart';
 import 'package:quick_poll/core/utils/validation_util.dart';
 import 'package:quick_poll/features/create_poll/data/model/poll_model.dart';
+import 'package:quick_poll/features/create_poll/domain/entities/poll_question.dart';
 import 'package:quick_poll/shared/widgets/qp_button.dart';
 
 import '../../../../core/app/config/route/paths.dart';
@@ -116,8 +117,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
         creatorName: 'anonymous',
         createdAt: DateTime.now(),
         pollType: selectedType,
-        status: status,
-        questions: questions)
+        question: PollQuestion(id: id, questionText: questionText, order: order));
   }
 
   final List<SegmentItem> segments = [

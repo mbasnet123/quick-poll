@@ -19,10 +19,9 @@ _PollModel _$PollModelFromJson(Map<String, dynamic> json) => _PollModel(
   pollType: $enumDecode(_$PollTypeEnumMap, json['pollType']),
   isAnonymous: json['isAnonymous'] as bool? ?? false,
   allowMultipleVotes: json['allowMultipleVotes'] as bool? ?? false,
-  status: $enumDecode(_$PollStatusEnumMap, json['status']),
-  questions: (json['questions'] as List<dynamic>)
-      .map((e) => PollQuestion.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  isDraft: json['isDraft'] as bool? ?? false,
+  isClosed: json['isClosed'] as bool? ?? false,
+  question: PollQuestion.fromJson(json['question'] as Map<String, dynamic>),
   totalVotes: (json['totalVotes'] as num?)?.toInt() ?? 0,
   tags:
       (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
@@ -41,8 +40,9 @@ Map<String, dynamic> _$PollModelToJson(_PollModel instance) =>
       'pollType': _$PollTypeEnumMap[instance.pollType]!,
       'isAnonymous': instance.isAnonymous,
       'allowMultipleVotes': instance.allowMultipleVotes,
-      'status': _$PollStatusEnumMap[instance.status]!,
-      'questions': instance.questions,
+      'isDraft': instance.isDraft,
+      'isClosed': instance.isClosed,
+      'question': instance.question,
       'totalVotes': instance.totalVotes,
       'tags': instance.tags,
     };
@@ -52,10 +52,4 @@ const _$PollTypeEnumMap = {
   PollType.multipleChoice: 'multipleChoice',
   PollType.rating: 'rating',
   PollType.text: 'text',
-};
-
-const _$PollStatusEnumMap = {
-  PollStatus.draft: 'draft',
-  PollStatus.active: 'active',
-  PollStatus.closed: 'closed',
 };

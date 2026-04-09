@@ -1,3 +1,4 @@
+import 'package:quick_poll/features/create_poll/domain/entities/poll_option.dart';
 import 'package:quick_poll/features/create_poll/domain/entities/poll_question.dart';
 import 'package:quick_poll/shared/enums/poll_type.dart';
 import 'package:quick_poll/shared/enums/poll_status.dart';
@@ -6,6 +7,7 @@ import 'package:quick_poll/shared/enums/poll_status.dart';
 class PollEntity {
   final String id;
   final String title;
+  final String question;
   final String? description;
   final String creatorId;
   final String creatorName;
@@ -26,7 +28,7 @@ class PollEntity {
     return PollStatus.active;
   }
 
-  final PollQuestion question;
+  final List<PollOption> options;
   final int totalVotes;
   final List<String> tags;
 
@@ -42,8 +44,8 @@ class PollEntity {
     this.isAnonymous = false,
     this.allowMultipleVotes = false,
     // required this.status,
-    required this.question,
+    required this.options,
     this.totalVotes = 0,
-    this.tags = const [], this.isDraft = false, this.isClosed = false,
+    this.tags = const [], this.isDraft = false, this.isClosed = false, required this.question,
   });
 }
