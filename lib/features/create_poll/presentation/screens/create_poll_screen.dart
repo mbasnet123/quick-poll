@@ -89,20 +89,19 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
             .asMap()
             .entries
             .map(
-              (e) =>
-              PollOption(
+              (e) => PollOption(
                 id: e.key.toString(),
                 optionText: e.value,
                 order: e.key,
               ),
-        )
+            )
             .toList();
         break;
 
       case PollType.rating:
         options = List.generate(
           5,
-              (i) => PollOption(id: i.toString(), optionText: "i"),
+          (i) => PollOption(id: i.toString(), optionText: "i"),
         );
         break;
 
@@ -111,13 +110,15 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
         break;
     }
 
-    final poll = PollModel(id: DateTime.now().millisecondsSinceEpoch.toString(),
-        title: questionController.text,
-        creatorId: 'current_user',
-        creatorName: 'anonymous',
-        createdAt: DateTime.now(),
-        pollType: selectedType,
-        question: PollQuestion(id: id, questionText: questionText, order: order));
+    final poll = PollModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      title: questionController.text,
+      creatorId: 'current_user',
+      creatorName: 'anonymous',
+      createdAt: DateTime.now(),
+      pollType: selectedType,
+      question: PollQuestion(id: id, questionText: questionText, order: order),
+    );
   }
 
   final List<SegmentItem> segments = [
@@ -218,6 +219,25 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
 
                     Text("POLL TYPE"),
 
+                    SizedBox(height: 10),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: PollType.values.map((type) {
+                        final isSelected = selectedType == type;
+                        return ChoiceChip(
+                          label: Text(type.name),
+                          selected: isSelected,
+                          selectedColor: Colors.blue,
+                          onSelected: (_) => setState(() {
+                            selectedType = type;
+                            if (type != PollType.multipleChoice) {
+                              customOptions.clear();
+                            }
+                          }),
+                        );
+                      }).toList(),
+                    ),
                     SizedBox(height: 10),
 
                     FilledCTAButton(
