@@ -89,20 +89,19 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
             .asMap()
             .entries
             .map(
-              (e) =>
-              PollOption(
+              (e) => PollOption(
                 id: e.key.toString(),
                 optionText: e.value,
                 order: e.key,
               ),
-        )
+            )
             .toList();
         break;
 
       case PollType.rating:
         options = List.generate(
           5,
-              (i) => PollOption(id: i.toString(), optionText: "i"),
+          (i) => PollOption(id: i.toString(), optionText: "i"),
         );
         break;
 
@@ -112,10 +111,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     }
 
     final poll = PollModel(
-      id: DateTime
-          .now()
-          .millisecondsSinceEpoch
-          .toString(),
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: questionController.text,
       creatorId: 'current_user',
       creatorName: 'anonymous',
@@ -233,13 +229,12 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                           label: Text(type.name),
                           selected: isSelected,
                           selectedColor: Colors.blue,
-                          onSelected: (_) =>
-                              setState(() {
-                                selectedType = type;
-                                if (type != PollType.multipleChoice) {
-                                  customOptions.clear();
-                                }
-                              }),
+                          onSelected: (_) => setState(() {
+                            selectedType = type;
+                            if (type != PollType.multipleChoice) {
+                              customOptions.clear();
+                            }
+                          }),
                         );
                       }).toList(),
                     ),
@@ -247,28 +242,85 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
 
                     // dynamic options selection
                     if (selectedType == PollType.multipleChoice) ...[
-                      Text("Options(2-5)",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text("${customOptions.length}/5 added",
-                        style: TextStyle(color: Colors.grey),),
-                      SizedBox(height: 8,),
-                      Row(children: [
-                        Expanded(child: TextField(
-                          controller: optionController,
-                          decoration: InputDecoration(
-                            hintText: "Enter option ${customOptions.length +
-                                1}",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                      Text(
+                        "Options(2-5)",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "${customOptions.length}/5 added",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: optionController,
+                              decoration: InputDecoration(
+                                hintText:
+                                    "Enter option ${customOptions.length + 1}",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              onSubmitted: (_) => _addOption(),
+                            ),
                           ),
-                          onSubmitted: (_) => _addOption(),
-                        )),
-                        SizedBox(height: 8,),
-                        ElevatedButton(onPressed: customOptions.length < 5
-                            ? _addOption
-                            : null, child: Text("Add"),),
-                      ],)
+                          SizedBox(height: 8),
+                          ElevatedButton(
+                            onPressed: customOptions.length < 5
+                                ? _addOption
+                                : null,
+                            child: Text("Add"),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 8),
+
+                      // List of added options
+                      ...customOptions.asMap().entries.map((entry) {
+                        return Card(
+                          margin: EdgeInsets.only(bottom: 8),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Text("$entry.key + 1"),
+                            ),
+                            title: Text(entry.value),
+                            trailing: IconButton(
+                              onPressed: () => _removeOption(entry.key),
+                              icon: Icon(Icons.delete, color: Colors.red),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ] else ...[
+                      //preview for other types
+                      Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.info_outline, color: Colors.grey),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                selectedType == PollType.yesNo
+                                    ? "Will show Yes/No options"
+                                    : selectedType == PollType.rating
+                                    ? "Will show 1-5 star rating"
+                                    : "Voters will type their answer",
+                                style: TextStyle(color: Colors.grey.shade700),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
+                    SizedBox(height: 8),
 
                     FilledCTAButton(
                       onPressed: _onCreatePoll,
