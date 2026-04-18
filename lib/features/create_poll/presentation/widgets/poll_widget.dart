@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/enums/poll_type.dart';
 import '../../data/model/poll_model.dart';
 
 class PollWidget extends StatelessWidget {
@@ -8,6 +9,19 @@ class PollWidget extends StatelessWidget {
   const PollWidget({
     super.key, required this.poll,
   });
+
+  IconData _getTypeIcon(PollType type) {
+    switch (type) {
+      case PollType.yesNo:
+        return Icons.thumb_up_outlined;
+      case PollType.multipleChoice:
+        return Icons.format_list_bulleted;
+      case PollType.rating:
+        return Icons.star_border;
+      case PollType.text:
+        return Icons.text_fields;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

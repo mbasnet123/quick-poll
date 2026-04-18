@@ -130,6 +130,8 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   @override
   void dispose() {
     questionController.dispose();
+    descriptionController.dispose();
+    optionController.dispose();
     super.dispose();
   }
 
