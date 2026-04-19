@@ -32,7 +32,7 @@ class PollEntity {
   final int totalVotes;
   final List<String> tags;
 
-  const PollEntity({
+  PollEntity({
     required this.id,
     required this.title,
     this.description,
@@ -46,6 +46,9 @@ class PollEntity {
     // required this.status,
     required this.options,
     this.totalVotes = 0,
-    this.tags = const [], this.isDraft = false, this.isClosed = false, required this.question,
+    this.tags = const [],
+    this.isDraft = false,
+    this.isClosed = false,
+    required this.question,
   });
 }

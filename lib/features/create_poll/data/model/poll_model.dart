@@ -1,9 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quick_poll/features/create_poll/domain/entities/poll_entity.dart';
 
-import '../../../../shared/enums/poll_status.dart';
 import '../../../../shared/enums/poll_type.dart';
-import '../../domain/entities/poll_question.dart';
+import '../../domain/entities/poll_option.dart';
 
 part 'poll_model.freezed.dart';
 part 'poll_model.g.dart';
@@ -25,9 +24,10 @@ abstract class PollModel with _$PollModel {
     @Default(false) bool allowMultipleVotes,
     @Default(false) bool isDraft,
     @Default(false) bool isClosed,
-    required PollQuestion question,
+    required String question,
     @Default(0) int totalVotes,
     @Default([]) List<String> tags,
+    required List<PollOption> options,
   }) = _PollModel;
 
   factory PollModel.fromJson(Map<String, dynamic> json) =>
@@ -49,7 +49,7 @@ abstract class PollModel with _$PollModel {
     isClosed: isClosed,
     question: question,
     totalVotes: totalVotes,
-    tags: tags,
+    tags: tags, options: options,
   );
 
   // Create Model from Entity
@@ -68,6 +68,6 @@ abstract class PollModel with _$PollModel {
     isClosed: entity.isClosed,
     question: entity.question,
     totalVotes: entity.totalVotes,
-    tags: entity.tags,
+    tags: entity.tags, options: entity.options,
   );
 }

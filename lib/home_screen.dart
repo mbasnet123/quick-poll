@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 : ListView.builder(padding: EdgeInsets.all(16), itemCount: polls.length, itemBuilder: (context, index) {
                   final poll = polls[index];
-                  return PollCard()
+                  return PollCard();
             }),
           ],
         ),

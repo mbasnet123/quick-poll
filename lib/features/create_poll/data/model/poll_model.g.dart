@@ -21,11 +21,14 @@ _PollModel _$PollModelFromJson(Map<String, dynamic> json) => _PollModel(
   allowMultipleVotes: json['allowMultipleVotes'] as bool? ?? false,
   isDraft: json['isDraft'] as bool? ?? false,
   isClosed: json['isClosed'] as bool? ?? false,
-  question: PollQuestion.fromJson(json['question'] as Map<String, dynamic>),
+  question: json['question'] as String,
   totalVotes: (json['totalVotes'] as num?)?.toInt() ?? 0,
   tags:
       (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const [],
+  options: (json['options'] as List<dynamic>)
+      .map((e) => PollOption.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$PollModelToJson(_PollModel instance) =>
@@ -45,6 +48,7 @@ Map<String, dynamic> _$PollModelToJson(_PollModel instance) =>
       'question': instance.question,
       'totalVotes': instance.totalVotes,
       'tags': instance.tags,
+      'options': instance.options,
     };
 
 const _$PollTypeEnumMap = {

@@ -117,7 +117,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       creatorName: 'anonymous',
       createdAt: DateTime.now(),
       pollType: selectedType,
-      question: PollQuestion(id: id, questionText: questionText, order: order),
+      question: pollQuestion, options: options,
     );
   }
 
