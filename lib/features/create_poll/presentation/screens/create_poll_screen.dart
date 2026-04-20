@@ -187,7 +187,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                       decoration: InputDecoration(
                         hintText: "What would you like to ask?",
                         filled: true,
-                        fillColor: Colors.yellowAccent,
+                        fillColor: context.colorScheme.primaryContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: BorderSide.none,
@@ -206,7 +206,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                       decoration: InputDecoration(
                         hintText: "Add context or details",
                         filled: true,
-                        fillColor: context.colorScheme.primary,
+                        fillColor: context.colorScheme.primaryContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: BorderSide.none,
@@ -230,7 +230,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                         return ChoiceChip(
                           label: Text(type.name),
                           selected: isSelected,
-                          selectedColor: Colors.blue,
+                          selectedColor: context.colorScheme.secondary,
                           onSelected: (_) => setState(() {
                             selectedType = type;
                             if (type != PollType.multipleChoice) {
@@ -286,7 +286,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                           margin: EdgeInsets.only(bottom: 8),
                           child: ListTile(
                             leading: CircleAvatar(
-                              child: Text("$entry.key + 1"),
+                              child: Text("${entry.key + 1}"),
                             ),
                             title: Text(entry.value),
                             trailing: IconButton(
@@ -347,55 +347,56 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.all(4),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: List.generate(segments.length, (index) {
-                    final isSelected = selectedPollTypeIndex == index;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedPollTypeIndex = index;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        margin: EdgeInsets.only(
-                          right: index != segments.length - 1 ? 8 : 0,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isSelected ? Colors.blue : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              segments[index].icon,
-                              color: isSelected ? Colors.white : Colors.black,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              segments[index].label,
-                              style: TextStyle(
-                                color: isSelected ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              ),
+
+              // Container(
+              //   decoration: BoxDecoration(
+              //     color: Colors.grey,
+              //     borderRadius: BorderRadius.circular(12),
+              //   ),
+              //   padding: const EdgeInsets.all(4),
+              //   child: Row(
+              //     mainAxisSize: MainAxisSize.min,
+              //     children: List.generate(segments.length, (index) {
+              //       final isSelected = selectedPollTypeIndex == index;
+              //       return GestureDetector(
+              //         onTap: () {
+              //           setState(() {
+              //             selectedPollTypeIndex = index;
+              //           });
+              //         },
+              //         child: AnimatedContainer(
+              //           duration: Duration(milliseconds: 200),
+              //           margin: EdgeInsets.only(
+              //             right: index != segments.length - 1 ? 8 : 0,
+              //           ),
+              //           padding: const EdgeInsets.symmetric(
+              //             horizontal: 12,
+              //             vertical: 8,
+              //           ),
+              //           decoration: BoxDecoration(
+              //             color: isSelected ? Colors.blue : Colors.transparent,
+              //             borderRadius: BorderRadius.circular(8),
+              //           ),
+              //           child: Row(
+              //             children: [
+              //               Icon(
+              //                 segments[index].icon,
+              //                 color: isSelected ? Colors.white : Colors.black,
+              //               ),
+              //               SizedBox(width: 8),
+              //               Text(
+              //                 segments[index].label,
+              //                 style: TextStyle(
+              //                   color: isSelected ? Colors.white : Colors.black,
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       );
+              //     }),
+              //   ),
+              // ),
             ],
           ),
         ),
