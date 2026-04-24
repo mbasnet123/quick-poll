@@ -117,7 +117,8 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       creatorName: 'anonymous',
       createdAt: DateTime.now(),
       pollType: selectedType,
-      question: pollQuestion, options: options,
+      question: questionController.text,
+      options: options,
     );
   }
 
@@ -134,37 +135,6 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     optionController.dispose();
     super.dispose();
   }
-
-  // void _onCreatePoll() {
-  //   final isValidated = _formKey.currentState?.validate() ?? false;
-  //   if (!isValidated) return;
-  //   _formKey.currentState!.save();
-  //
-  //   final question = pollQuestion;
-  //   final description = pollDescription;
-  //   final pollType = segments[selectedPollTypeIndex].label;
-  //
-  //   questionController.clear();
-  //   descriptionController.clear();
-  //
-  //   // context.push(
-  //   //   Paths.pollDetailsScreenRoute.path,
-  //   //   extra: {
-  //   //     'question': question,
-  //   //     'description': description,
-  //   //     'pollType': pollType,
-  //   //     'pollTypeIcon': segments[selectedPollTypeIndex].icon,
-  //   //   },
-  //   // );
-  //
-  //   context.pop({
-  //     'question': pollQuestion,
-  //     'description': pollDescription,
-  //     'pollType': pollType,
-  //     'pollTypeIcon': segments[selectedPollTypeIndex].icon,
-  //   }
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -347,56 +317,6 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                 ),
               ),
               SizedBox(height: 10),
-
-              // Container(
-              //   decoration: BoxDecoration(
-              //     color: Colors.grey,
-              //     borderRadius: BorderRadius.circular(12),
-              //   ),
-              //   padding: const EdgeInsets.all(4),
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.min,
-              //     children: List.generate(segments.length, (index) {
-              //       final isSelected = selectedPollTypeIndex == index;
-              //       return GestureDetector(
-              //         onTap: () {
-              //           setState(() {
-              //             selectedPollTypeIndex = index;
-              //           });
-              //         },
-              //         child: AnimatedContainer(
-              //           duration: Duration(milliseconds: 200),
-              //           margin: EdgeInsets.only(
-              //             right: index != segments.length - 1 ? 8 : 0,
-              //           ),
-              //           padding: const EdgeInsets.symmetric(
-              //             horizontal: 12,
-              //             vertical: 8,
-              //           ),
-              //           decoration: BoxDecoration(
-              //             color: isSelected ? Colors.blue : Colors.transparent,
-              //             borderRadius: BorderRadius.circular(8),
-              //           ),
-              //           child: Row(
-              //             children: [
-              //               Icon(
-              //                 segments[index].icon,
-              //                 color: isSelected ? Colors.white : Colors.black,
-              //               ),
-              //               SizedBox(width: 8),
-              //               Text(
-              //                 segments[index].label,
-              //                 style: TextStyle(
-              //                   color: isSelected ? Colors.white : Colors.black,
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       );
-              //     }),
-              //   ),
-              // ),
             ],
           ),
         ),
