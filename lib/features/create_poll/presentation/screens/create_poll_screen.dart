@@ -26,7 +26,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
   final descriptionController = TextEditingController();
   final optionController = TextEditingController();
   String pollDescription = "";
-  String pollQuestion = "";
+  String title = "";
   int selectedPollTypeIndex = 0;
 
   PollType selectedType = PollType.yesNo;
@@ -120,6 +120,8 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       question: questionController.text,
       options: options,
     );
+
+    context.pop(poll);
   }
 
   final List<SegmentItem> segments = [
@@ -163,9 +165,9 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                           borderSide: BorderSide.none,
                         ),
                       ),
-                      validator: ValidationUtil.pollQuestionValidator,
+                      validator: ValidationUtil.titleValidator,
                       onSaved: (value) {
-                        pollQuestion = value ?? "";
+                        title = value ?? "";
                       },
                     ),
                     SizedBox(height: 10),
@@ -299,7 +301,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                       text: "Create Poll",
                       isExpanded: true,
                     ),
-                    if (pollQuestion.isNotEmpty) ...[
+                    if (title.isNotEmpty) ...[
                       SizedBox(height: 10),
                       Container(
                         padding: EdgeInsets.symmetric(
@@ -310,7 +312,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
                           color: Colors.greenAccent,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Text(pollQuestion),
+                        child: Text(title),
                       ),
                     ],
                   ],

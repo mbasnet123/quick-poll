@@ -33,7 +33,7 @@ class PollWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(poll.title),
+          Text(poll.question),
           Text(poll.description ?? "no desc"),
         ],
       ),

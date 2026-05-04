@@ -40,10 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   )
-                : ListView.builder(padding: EdgeInsets.all(16), itemCount: polls.length, itemBuilder: (context, index) {
-                  final poll = polls[index];
-                  return PollWidget(poll: poll);
-            }),
+                : Expanded(
+                  child: ListView.builder(padding: EdgeInsets.all(16), itemCount: polls.length, itemBuilder: (context, index) {
+                    final poll = polls[index];
+                    return PollWidget(poll: poll);
+                              }),
+                ),
           ],
         ),
       ),
