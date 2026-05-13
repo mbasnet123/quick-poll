@@ -7,7 +7,7 @@ class PollListNotifier extends AsyncNotifier<List<PollModel>> {
   Future<List<PollModel>> build() async{
     final useCase = ref.read(getAllPollsUseCaseProvider);
     final entities = await useCase();
-    returen entities.map((e) => PollModel.fromEntity(e)).toList();
+    return entities.map((e) => PollModel.fromEntity(e)).toList();
   }
 
   Future<void> createPoll(PollModel poll) async {

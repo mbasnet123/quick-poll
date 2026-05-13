@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quick_poll/core/app/theme_extension.dart';
 import 'package:quick_poll/core/storage/local/tables.dart';
@@ -8,42 +9,31 @@ import 'package:quick_poll/features/create_poll/domain/entities/poll_question.da
 import 'package:quick_poll/shared/widgets/qp_button.dart';
 
 import '../../../../core/app/config/route/paths.dart';
+import '../../../../core/providers/poll_list_notifier.dart';
 import '../../../../shared/enums/poll_type.dart';
 import '../../domain/entities/poll_option.dart';
 import '../widgets/poll_text_filled_header.dart';
 import '../widgets/segment_item.dart';
 
-class CreatePollScreen extends StatefulWidget {
+class CreatePollScreen extends ConsumerStatefulWidget {
   const CreatePollScreen({super.key});
 
   @override
-  State<CreatePollScreen> createState() => _CreatePollScreenState();
+  ConsumerState<CreatePollScreen> createState() => _CreatePollScreenState();
 }
 
-class _CreatePollScreenState extends State<CreatePollScreen> {
+class _CreatePollScreenState extends ConsumerState<CreatePollScreen> {
   final _formKey = GlobalKey<FormState>();
   final questionController = TextEditingController();
   final descriptionController = TextEditingController();
   final optionController = TextEditingController();
-  String pollDescription = "";
-  String title = "";
+
+  // String pollDescription = "";
+  // String title = "";
   int selectedPollTypeIndex = 0;
 
   PollType selectedType = PollType.yesNo;
   final List<String> customOptions = [];
-
-  IconData _getTypeIcon(PollType type) {
-    switch (type) {
-      case PollType.yesNo:
-        return Icons.thumb_up_outlined;
-      case PollType.multipleChoice:
-        return Icons.format_list_bulleted;
-      case PollType.rating:
-        return Icons.star_border;
-      case PollType.text:
-        return Icons.text_fields;
-    }
-  }
 
   void _addOption() {
     if (optionController.text.isEmpty) return;
@@ -63,7 +53,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
     setState(() => customOptions.removeAt(index));
   }
 
-  void _onCreatePoll() {
+  Future<void> _onCreatePoll() async {
     if (!_formKey.currentState!.validate()) return;
 
     // validation for multipleChoice
@@ -74,13 +64,14 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       return;
     }
 
+    final pollId = DateTime.now().millisecondsSinceEpoch.toString();
     List<PollOption> options = [];
 
     switch (selectedType) {
       case PollType.yesNo:
         options = [
-          PollOption(id: '1', optionText: 'Yes', order: 0),
-          PollOption(id: '2', optionText: 'No', order: 1),
+          PollOption(id: '${pollId}_yes', optionText: 'Yes', order: 0),
+          PollOption(id: '${pollId}_yes', optionText: 'No', order: 1),
         ];
         break;
 
@@ -90,7 +81,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
             .entries
             .map(
               (e) => PollOption(
-                id: e.key.toString(),
+                id: '${pollId}_${e.key}',
                 optionText: e.value,
                 order: e.key,
               ),
@@ -101,7 +92,7 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       case PollType.rating:
         options = List.generate(
           5,
-          (i) => PollOption(id: i.toString(), optionText: "i"),
+          (i) => PollOption(id: '${pollId}_$i', optionText: '${i + 1}', order: i),
         );
         break;
 
@@ -119,9 +110,12 @@ class _CreatePollScreenState extends State<CreatePollScreen> {
       pollType: selectedType,
       question: questionController.text,
       options: options,
+      description: descriptionController.text.isEmpty? null : descriptionController.text,
     );
 
-    context.pop(poll);
+    await ref.read(pollListNotifierProvider.notifier).createPoll(poll);
+
+    if (mounted) context.pop();
   }
 
   final List<SegmentItem> segments = [
