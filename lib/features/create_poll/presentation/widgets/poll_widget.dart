@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/app/config/route/paths.dart';
 import '../../../../shared/enums/poll_type.dart';
 import '../../data/model/poll_model.dart';
 
@@ -25,17 +27,23 @@ class PollWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Color(0xffE8E5E5FF),
-        borderRadius: BorderRadius.circular(32),
+    return GestureDetector(
+      onTap: () => context.push(
+        Paths.pollDetails,
+        extra: poll,
       ),
-      child: Column(
-        children: [
-          Text(poll.question),
-          Text(poll.description ?? "no desc"),
-        ],
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Color(0xffE8E5E5FF),
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Column(
+          children: [
+            Text(poll.question),
+            Text(poll.description ?? "no desc"),
+          ],
+        ),
       ),
     );
   }
